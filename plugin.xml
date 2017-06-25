@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-sunmi"
+    version="0.0.1">
+    <name>Sunmi</name>
+    <description>Cordova Sunmi Plugin</description>
+    <license>MIT License</license>
+    <keywords>cordova,sunmi</keywords>
+	<repo>https://github.com/heitorherzog/cordova-plugin-sunmi.git</repo>
+    <issue>https://github.com/heitorherzog/cordova-plugin-sunmi/issues</issue>
+
+    <engines>
+            <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <js-module src="www/sunmi.js" name="sunmi">
+        <clobbers target="window.Sunmi" />
+    </js-module>
+
+    <platform name="android">
+        <source-file src="src/android/Sunmi.java" target-dir="src/br/heitorhherzog/cordova/sunmi" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Sunmi">
+                <param name="android-package" value="br.heitorhherzog.cordova.sunmi.Sunmi" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+		
+    <source-file src="build-extras.gradle" target-dir="../android" />
+	
+	<source-file src="src/android/aidl/com/sunmi/trans/TransBean.aidl" target-dir="src/woyou/aidlservice/jiuiv5/" />
+	<source-file src="src/android/aidl/woyou/aidlservice/jiuiv5/ICallback.aidl" target-dir="src/woyou/aidlservice/jiuiv5/" />
+	<source-file src="src/android/aidl/woyou/aidlservice/jiuiv5/ITax.aidl" target-dir="src/woyou/aidlservice/jiuiv5/" />
+	<source-file src="src/android/aidl/woyou/aidlservice/jiuiv5/IWoyouService.aidl" target-dir="src/woyou/aidlservice/jiuiv5/" />
+    
+	<source-file src="src/android/com/sunmi/printerhelper/BaseApp.java" target-dir="src/com/sunmi/printerhelper" />
+	<source-file src="src/android/com/sunmi/printerhelper/utils/AidlUtil.java" target-dir="src/com/sunmi/printerhelper/utils" />
+	<source-file src="src/android/com/sunmi/printerhelper/utils/PrinterCallback.java" target-dir="src/com/sunmi/printerhelper/utils" />
+	<source-file src="src/android/com/sunmi/printerhelper/utils/ESCUtil.java" target-dir="src/com/sunmi/printerhelper/utils" />   
+    <source-file src="src/android/com/sunmi/printerhelper/utils/BytesUtil.java" target-dir="src/com/sunmi/printerhelper/utils" />  
+    <source-file src="src/android/com/sunmi/printerhelper/bean/TableItem.java" target-dir="src/com/sunmi/printerhelper/bean" />
+	<source-file src="src/android/com/sunmi/trans/TransBean.java" target-dir="src/woyou/aidlservice/jiuiv5/" />
+	
+ <source-file src="src/core-3.3.0.jar" target-dir="libs" framework="true" />
+   
+    </platform>
+</plugin>
