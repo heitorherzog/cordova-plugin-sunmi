@@ -1,8 +1,11 @@
-//package org.apache.cordova.statusbar;
 package br.heitorhherzog.cordova.sunmi;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.Window;
 import com.sunmi.printerhelper.utils.AidlUtil;
 
@@ -60,6 +63,27 @@ public class Sunmi extends CordovaPlugin {
 			 callbackContext.success();
 		    return true;
 		}
+
+      if ("sendImage".equals(action)) {
+        //get image
+        String content = args.getString(0);
+        String image = content.split("base64,")[1];
+
+        //Get Context to send to printer service
+        Context context=this.cordova.getActivity().getApplicationContext();
+        AidlUtil.getInstance().connectPrinterService(context);
+
+        //decode to bitmap
+        byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        //send to printer
+        AidlUtil.getInstance().initPrinter();
+        AidlUtil.getInstance().printBitmap(bitmap);
+
+        callbackContext.success();
+        return true;
+      }
 
         return false;
     }
